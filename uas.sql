@@ -11,7 +11,6 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -32,6 +31,7 @@ CREATE TABLE `admin` (
   `nama` varchar(100) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL
+  -- buat unik usernamenya
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -40,19 +40,6 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`id`, `nama`, `username`, `password`) VALUES
 (1, 'Gilang Permana Putra', 'raja_iblis', 'admin123');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `login_history`
---
-
-CREATE TABLE `login_history` (
-  `id` int NOT NULL,
-  `id_admin` int NOT NULL,
-  `token` text NOT NULL,
-  `created_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -79,12 +66,6 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `login_history`
---
-ALTER TABLE `login_history`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
@@ -100,11 +81,6 @@ ALTER TABLE `mahasiswa`
 ALTER TABLE `admin`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
---
--- AUTO_INCREMENT for table `login_history`
---
-ALTER TABLE `login_history`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

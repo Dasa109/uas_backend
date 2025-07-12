@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/../vendor/autoload.php';
+
 header('Content-Type: application/json');
 
 spl_autoload_register(function ($class) {
@@ -7,6 +9,7 @@ spl_autoload_register(function ($class) {
     $directories = [
         __DIR__ . '/../core/',
         __DIR__ . '/../controller/',
+        __DIR__ . '/../middleware/'
     ];
 
     foreach ($directories as $directory) {
@@ -20,13 +23,21 @@ spl_autoload_register(function ($class) {
 
 require_once __DIR__ . '/studentStorage.php';
 
-// $studentStorage = new StudentStorage();
 $router = new Router();
+$router->add('POST', '/api/auth/login', [LoginController::class, 'login']);
+$router->add('GET', '/api/auth/me', [AuthController::class, 'show']);
+
 $router->add(
     'GET',
-    '/api/student',
+    '/api/students',
     [StudentController::class, 'getAllStudents']
 );
+$router->add(
+    'GET',
+    '/api/student/{nim}',
+    [StudentController::class, 'getOneStudent']
+);
+
 $router->add(
     'POST',
     '/api/student/create',
